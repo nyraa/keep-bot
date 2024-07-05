@@ -11,7 +11,8 @@ from linebot.v3.messaging import (
     ApiClient,
     MessagingApi,
     ReplyMessageRequest,
-    TextMessage
+    TextMessage,
+    ImageMessage
 )
 from linebot.v3.webhooks import (
     MessageEvent,
@@ -48,5 +49,16 @@ def handle_message(event):
         )
         line_bot_api.reply_message(reply_message_request)
 
+'''
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image(event):
+    with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
+        reply_message_request = ReplyMessageRequest(
+            reply_token=event.reply_token,
+            messages=[TextMessage(text="画像を受信しました")]
+        )
+        line_bot_api.reply_message(reply_message_request)
+'''
 if __name__ == "__main__":
     app.run()
